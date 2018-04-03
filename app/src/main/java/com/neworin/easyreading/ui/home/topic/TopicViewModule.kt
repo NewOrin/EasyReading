@@ -1,4 +1,4 @@
-package com.neworin.easyreading.ui.topic
+package com.neworin.easyreading.ui.home.topic
 
 import dagger.Binds
 import dagger.Module

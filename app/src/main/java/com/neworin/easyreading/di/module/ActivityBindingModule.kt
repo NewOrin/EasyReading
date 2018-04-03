@@ -1,6 +1,6 @@
 package com.neworin.easyreading.di.module
 
-import com.neworin.easyreading.ui.topic.TopicBindingModule
+import com.neworin.easyreading.ui.home.topic.TopicBindingModule
 import dagger.Module
 
 /**

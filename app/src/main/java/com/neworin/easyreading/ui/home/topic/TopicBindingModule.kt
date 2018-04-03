@@ -1,4 +1,4 @@
-package com.neworin.easyreading.ui.topic
+package com.neworin.easyreading.ui.home.topic
 
 import com.neworin.easyreading.ui.home.HomeActivity
 import dagger.Module

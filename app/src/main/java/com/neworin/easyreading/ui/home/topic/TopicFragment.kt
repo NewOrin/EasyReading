@@ -1,5 +1,6 @@
-package com.neworin.easyreading.ui.topic
+package com.neworin.easyreading.ui.home.topic
 
+import android.os.Bundle
 import android.view.View
 import com.neworin.easyreading.R
 import com.neworin.easyreading.base.BaseFragment
@@ -13,6 +14,14 @@ import javax.inject.Inject
  * desc   :
  */
 class TopicFragment : BaseFragment(), TopicContract.View {
+
+    companion object {
+        fun newInstance(bundle: Bundle): TopicFragment {
+            val fragment = TopicFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     @JvmField
     @Inject
