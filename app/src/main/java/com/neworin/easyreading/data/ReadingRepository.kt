@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class ReadingRepository(service: ReadingService?) : ReadingDataSourse {
     private var mReadingService = service
 
-    override fun getTopicList(lastCursor: String, pageSize: Int): Flowable<TopicEntity>? {
+    override fun getTopicList(lastCursor: Int?, pageSize: Int): Flowable<TopicEntity>? {
         return doRequest(mReadingService?.getTopicList(lastCursor, pageSize))
     }
 

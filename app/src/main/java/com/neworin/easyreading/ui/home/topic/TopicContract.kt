@@ -15,6 +15,6 @@ interface TopicContract {
     }
 
     interface Presenter : IPresenter {
-        fun getTopicData(lastCursor: String, pageSize: Int)
+        fun getTopicData()
     }
 }

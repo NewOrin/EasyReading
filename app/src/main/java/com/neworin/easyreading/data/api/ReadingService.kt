@@ -2,6 +2,8 @@ package com.neworin.easyreading.data.api
 
 import com.neworin.easyreading.vo.TopicEntity
 import io.reactivex.Flowable
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +15,5 @@ import retrofit2.http.Query
 interface ReadingService {
 
     @GET("topic")
-    fun getTopicList(@Query("lastCursor") lastCursor: String, @Query(" pageSize ") pageSize: Int): Flowable<TopicEntity>
+    fun getTopicList(@Query("lastCursor") lastCursor: Int?, @Query(value = "pageSize",encoded = false) pageSize: Int): Flowable<TopicEntity>
 }
