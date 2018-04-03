@@ -1,5 +1,6 @@
 package com.neworin.easyreading.http
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.neworin.easyreading.BaseApplication
 import com.neworin.easyreading.R
 import okhttp3.OkHttpClient
@@ -24,6 +25,7 @@ object DefaultOkHttpClient {
         builder.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
         builder.readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
         builder.writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+        builder.addNetworkInterceptor(StethoInterceptor())
         setCertificates(builder)
         return builder.build()
     }

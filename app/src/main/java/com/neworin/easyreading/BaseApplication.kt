@@ -3,6 +3,7 @@ package com.neworin.easyreading
 import android.app.Activity
 import android.app.Application
 import android.support.v4.app.Fragment
+import com.facebook.stetho.Stetho
 import com.neworin.easyreading.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -33,6 +34,7 @@ class BaseApplication : Application(), HasActivityInjector, HasSupportFragmentIn
         super.onCreate()
         INSTANCE = this
         DaggerAppComponent.builder().application(this).build().inject(this)
+        Stetho.initializeWithDefaults(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity>? {
