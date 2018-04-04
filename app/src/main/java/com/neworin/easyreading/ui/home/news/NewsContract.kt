@@ -15,5 +15,6 @@ interface NewsContract {
     interface Presenter : IPresenter {
         fun getTechNewsData(isRefresh: Boolean)
         fun getDevNewsData(isRefresh: Boolean)
+        fun getBlockNewsData(isRefresh: Boolean)
     }
 }

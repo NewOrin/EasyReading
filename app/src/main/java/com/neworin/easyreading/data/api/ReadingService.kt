@@ -31,4 +31,11 @@ interface ReadingService {
      */
     @GET("technews")
     fun getDevNewsList(@Query("lastCursor") lastCursor: Long?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<NewsEntity>>
+
+    /**
+     * 区块链快讯
+     */
+    @GET("blockchain")
+    fun getBlockNewsList(@Query("lastCursor") lastCursor: Long?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<NewsEntity>>
+
 }

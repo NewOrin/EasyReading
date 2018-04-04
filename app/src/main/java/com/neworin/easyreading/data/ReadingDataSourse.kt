@@ -17,4 +17,6 @@ interface ReadingDataSourse : IModel {
     fun getTechNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>?
 
     fun getDevNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>?
+
+    fun getBlockNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>?
 }

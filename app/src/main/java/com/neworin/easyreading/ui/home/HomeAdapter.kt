@@ -15,16 +15,22 @@ import com.neworin.easyreading.ui.home.topic.TopicFragment
 class HomeAdapter(fm: FragmentManager, var list: ArrayList<String>) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        if (position == 1) {
             val bundle = Bundle()
-            bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_TECH)
-            return NewsFragment.newInstance(bundle)
-        } else if (position == 2) {
-            val bundle = Bundle()
-            bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_DEV)
-            return NewsFragment.newInstance(bundle)
+        return when (position) {
+            1 -> {
+                bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_TECH)
+                NewsFragment.newInstance(bundle)
+            }
+            2 -> {
+                bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_DEV)
+                NewsFragment.newInstance(bundle)
+            }
+            3 -> {
+                bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_BLOCK_CHAIN)
+                NewsFragment.newInstance(bundle)
+            }
+            else -> TopicFragment.newInstance(Bundle())
         }
-        return TopicFragment.newInstance(Bundle())
     }
 
     override fun getCount(): Int {

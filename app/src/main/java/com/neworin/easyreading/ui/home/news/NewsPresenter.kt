@@ -47,4 +47,21 @@ class NewsPresenter(repository: ReadingRepository, rootView: NewsContract.View) 
                 })
         addDispose(flowable)
     }
+
+    /**
+     * 获取区块链快讯
+     */
+    override fun getBlockNewsData(isRefresh: Boolean) {
+        if (isRefresh) {
+            lastCursor = null
+        }
+        val flowable = mRepository.getBlockNewsList(lastCursor, PAGE_SIZE)
+                ?.subscribe({
+                    mView.showData(it)
+                    lastCursor = it.data?.last()?.publishDate!!.toDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")?.time!!
+                }, {
+                    mView.showDataError(it)
+                })
+        addDispose(flowable)
+    }
 }

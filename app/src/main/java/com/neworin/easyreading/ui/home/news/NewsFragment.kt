@@ -31,6 +31,8 @@ class NewsFragment : BaseRecyclerViewFragment<NewsEntity, BaseViewHolder>(), New
         const val PAGE_TYPE_TECH = 0x001
         //开发者资讯
         const val PAGE_TYPE_DEV = 0x002
+        //区块链快讯
+        const val PAGE_TYPE_BLOCK_CHAIN = 0x003
 
         const val PAGE_TYPE_KEY = "page_type_key"
 
@@ -65,10 +67,10 @@ class NewsFragment : BaseRecyclerViewFragment<NewsEntity, BaseViewHolder>(), New
      */
     private fun postData(isRefresh: Boolean) {
         mIsRefreshing = isRefresh
-        if (mPageType == PAGE_TYPE_TECH) {
-            mPresenter?.getTechNewsData(mIsRefreshing)
-        } else {
-            mPresenter?.getDevNewsData(mIsRefreshing)
+        when (mPageType) {
+            PAGE_TYPE_TECH -> mPresenter?.getTechNewsData(mIsRefreshing)
+            PAGE_TYPE_BLOCK_CHAIN -> mPresenter?.getBlockNewsData(mIsRefreshing)
+            else -> mPresenter?.getDevNewsData(mIsRefreshing)
         }
     }
 

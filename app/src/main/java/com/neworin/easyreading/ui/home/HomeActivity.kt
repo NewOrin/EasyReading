@@ -20,6 +20,7 @@ class HomeActivity : BaseActivity() {
         mTitles.add("热门话题")
         mTitles.add("科技动态")
         mTitles.add("开发者资讯")
+        mTitles.add("区块链快讯")
         home_viewpager.adapter = HomeAdapter(supportFragmentManager, mTitles)
         home_tab_layout.setupWithViewPager(home_viewpager)
     }

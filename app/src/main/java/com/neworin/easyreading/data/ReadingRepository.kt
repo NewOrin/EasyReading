@@ -30,6 +30,10 @@ class ReadingRepository(service: ReadingService?) : ReadingDataSourse {
         return doRequest(mReadingService?.getDevNewsList(lastCursor, pageSize))
     }
 
+    override fun getBlockNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>? {
+        return doRequest(mReadingService?.getBlockNewsList(lastCursor, pageSize))
+    }
+
     private fun <RESPONSE> doRequest(request: Flowable<RESPONSE>?): Flowable<RESPONSE>? {
         return request
                 ?.subscribeOn(Schedulers.io())
