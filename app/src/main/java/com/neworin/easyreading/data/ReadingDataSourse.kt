@@ -14,5 +14,7 @@ import io.reactivex.Flowable
 interface ReadingDataSourse : IModel {
     fun getTopicList(lastCursor: Int?,pageSize: Int): Flowable<PageResult<TopicEntity>>?
 
-    fun getNewsList(lastCursor: Int?,pageSize: Int): Flowable<PageResult<NewsEntity>>?
+    fun getTechNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>?
+
+    fun getDevNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>?
 }

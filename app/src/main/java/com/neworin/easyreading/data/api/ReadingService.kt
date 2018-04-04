@@ -14,9 +14,21 @@ import retrofit2.http.Query
  */
 interface ReadingService {
 
+    /**
+     * 热门话题
+     */
     @GET("topic")
     fun getTopicList(@Query("lastCursor") lastCursor: Int?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<TopicEntity>>
 
+    /**
+     * 科技动态
+     */
     @GET("news")
-    fun getNewsList(@Query("lastCursor") lastCursor: Int?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<NewsEntity>>
+    fun getTechNewsList(@Query("lastCursor") lastCursor: Long?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<NewsEntity>>
+
+    /**
+     * 开发者资讯
+     */
+    @GET("technews")
+    fun getDevNewsList(@Query("lastCursor") lastCursor: Long?, @Query(value = "pageSize", encoded = false) pageSize: Int): Flowable<PageResult<NewsEntity>>
 }

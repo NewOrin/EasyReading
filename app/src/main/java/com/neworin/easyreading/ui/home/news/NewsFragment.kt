@@ -8,6 +8,7 @@ import com.neworin.easyreading.R
 import com.neworin.easyreading.base.BaseRecyclerViewFragment
 import com.neworin.easyreading.vo.NewsEntity
 import com.neworin.easyreading.vo.PageResult
+import kotlinx.android.synthetic.main.item_base_recyclerview.*
 import javax.inject.Inject
 
 /**
@@ -23,8 +24,16 @@ class NewsFragment : BaseRecyclerViewFragment<NewsEntity, BaseViewHolder>(), New
     private var mIsRefreshing = false
     private var mCurrentCounter = 0
     private var mDatas = ArrayList<NewsEntity>()
+    private var mPageType = PAGE_TYPE_TECH
 
     companion object {
+        //科技动态
+        const val PAGE_TYPE_TECH = 0x001
+        //开发者资讯
+        const val PAGE_TYPE_DEV = 0x002
+
+        const val PAGE_TYPE_KEY = "page_type_key"
+
         fun newInstance(bundle: Bundle): NewsFragment {
             val fragment = NewsFragment()
             fragment.arguments = bundle
@@ -34,27 +43,40 @@ class NewsFragment : BaseRecyclerViewFragment<NewsEntity, BaseViewHolder>(), New
 
     override fun initializeView(view: View) {
         super.initializeView(view)
-        mPresenter?.getNewsData(mIsRefreshing)
+        val bundle = arguments
+        mPageType = bundle?.getInt(PAGE_TYPE_KEY, PAGE_TYPE_TECH) ?: PAGE_TYPE_TECH
+        postData(false)
     }
 
     override fun getAdapter(): BaseQuickAdapter<NewsEntity, BaseViewHolder>? {
-        return NewsAdapter(R.layout.item_home_list)
+        return NewsAdapter(R.layout.item_news, mDatas)
     }
 
     override fun handleRefresh() {
-        mIsRefreshing = true
-        mPresenter?.getNewsData(mIsRefreshing)
+        postData(true)
     }
 
     override fun handleLoadMore() {
-        mIsRefreshing = false
-        mPresenter?.getNewsData(mIsRefreshing)
+        postData(false)
+    }
+
+    /**
+     * 请求数据
+     */
+    private fun postData(isRefresh: Boolean) {
+        mIsRefreshing = isRefresh
+        if (mPageType == PAGE_TYPE_TECH) {
+            mPresenter?.getTechNewsData(mIsRefreshing)
+        } else {
+            mPresenter?.getDevNewsData(mIsRefreshing)
+        }
     }
 
     override fun showData(data: PageResult<NewsEntity>?) {
         mDatas = data?.data as ArrayList<NewsEntity>
         if (mIsRefreshing) {
             mAdapter?.setNewData(mDatas)
+            base_srl.post { base_srl.isRefreshing = false }
         } else {
             if (mCurrentCounter == data.totalItems) {
                 mAdapter?.loadMoreEnd()

@@ -13,6 +13,7 @@ interface NewsContract {
     interface View : IRecyclerView<NewsEntity>
 
     interface Presenter : IPresenter {
-        fun getNewsData(isRefresh: Boolean)
+        fun getTechNewsData(isRefresh: Boolean)
+        fun getDevNewsData(isRefresh: Boolean)
     }
 }

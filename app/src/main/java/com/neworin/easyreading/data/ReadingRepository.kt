@@ -22,8 +22,12 @@ class ReadingRepository(service: ReadingService?) : ReadingDataSourse {
         return doRequest(mReadingService?.getTopicList(lastCursor, pageSize))
     }
 
-    override fun getNewsList(lastCursor: Int?, pageSize: Int): Flowable<PageResult<NewsEntity>>? {
-        return doRequest(mReadingService?.getNewsList(lastCursor, pageSize))
+    override fun getTechNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>? {
+        return doRequest(mReadingService?.getTechNewsList(lastCursor, pageSize))
+    }
+
+    override fun getDevNewsList(lastCursor: Long?, pageSize: Int): Flowable<PageResult<NewsEntity>>? {
+        return doRequest(mReadingService?.getDevNewsList(lastCursor, pageSize))
     }
 
     private fun <RESPONSE> doRequest(request: Flowable<RESPONSE>?): Flowable<RESPONSE>? {

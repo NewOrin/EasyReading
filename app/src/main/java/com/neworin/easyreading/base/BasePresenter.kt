@@ -15,11 +15,11 @@ open class BasePresenter<M : IModel, V : IView>(var mRepository: M,var mView: V)
 
     private var mCompositeDispose: CompositeDisposable? = null
 
-    protected fun addDispose(disposable: Disposable) {
+    protected fun addDispose(disposable: Disposable?) {
         if (mCompositeDispose == null) {
             mCompositeDispose = CompositeDisposable()
         }
-        mCompositeDispose?.add(disposable)
+        disposable?.let { mCompositeDispose?.add(it) }
     }
 
     override fun unDispose() {

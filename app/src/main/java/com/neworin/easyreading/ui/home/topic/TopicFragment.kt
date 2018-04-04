@@ -34,13 +34,14 @@ class TopicFragment : BaseRecyclerViewFragment<TopicEntity, BaseViewHolder>(), T
     }
 
     override fun getAdapter(): BaseQuickAdapter<TopicEntity, BaseViewHolder>? {
-        return TopicAdapter(R.layout.item_home_list, mDatas)
+        return TopicAdapter(R.layout.item_topic, mDatas)
     }
 
     override fun showTopicData(dto: PageResult<TopicEntity>?) {
         mDatas = dto?.data as ArrayList<TopicEntity>
         if (mIsRefreshing) {
             mAdapter?.setNewData(mDatas)
+            base_srl.post { base_srl.isRefreshing = false }
         } else {
             if (mCurrentCounter == dto.totalItems) {
                 mAdapter?.loadMoreEnd()
@@ -68,7 +69,6 @@ class TopicFragment : BaseRecyclerViewFragment<TopicEntity, BaseViewHolder>(), T
     override fun handleRefresh() {
         mIsRefreshing = true
         mPresenter?.getTopicData(mIsRefreshing)
-        base_srl.post { base_srl.isRefreshing = false }
     }
 
     override fun handleLoadMore() {

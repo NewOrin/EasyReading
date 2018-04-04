@@ -16,7 +16,13 @@ class HomeAdapter(fm: FragmentManager, var list: ArrayList<String>) : FragmentPa
 
     override fun getItem(position: Int): Fragment {
         if (position == 1) {
-            return NewsFragment.newInstance(Bundle())
+            val bundle = Bundle()
+            bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_TECH)
+            return NewsFragment.newInstance(bundle)
+        } else if (position == 2) {
+            val bundle = Bundle()
+            bundle.putInt(NewsFragment.PAGE_TYPE_KEY, NewsFragment.PAGE_TYPE_DEV)
+            return NewsFragment.newInstance(bundle)
         }
         return TopicFragment.newInstance(Bundle())
     }

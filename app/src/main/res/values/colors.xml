@@ -6,4 +6,5 @@
     <color name="bgPageColor">#f6f6f6</color>
     <color name="white">#FFFFFF</color>
     <color name="mediumGrayColor">#999999</color>
+    <color name="tab_layout_text_color">#748dfd</color>
 </resources>

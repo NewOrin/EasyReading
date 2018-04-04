@@ -16,12 +16,12 @@ import com.neworin.easyreading.vo.TopicEntity
  */
 class TopicAdapter(layoutId: Int, datas: ArrayList<TopicEntity>) : BaseQuickAdapter<TopicEntity, BaseViewHolder>(layoutId, datas) {
     override fun convert(helper: BaseViewHolder, item: TopicEntity?) {
-        helper.setText(R.id.item_home_title, item?.title)
-        helper.setText(R.id.item_home_summary, item?.summary)
+        helper.setText(R.id.item_topic_title, item?.title)
+        helper.setText(R.id.item_topic_summary, item?.summary)
         val ssb = SpannableStringBuilder(item?.title + "   " + formatTime(item?.publishDate))
         val textAppearanceSpan = TextAppearanceSpan(mContext, R.style.time_textAppearance)
         ssb.setSpan(textAppearanceSpan, item?.title?.length ?: 0
         +2, ssb.length, SpannableString.SPAN_INCLUSIVE_INCLUSIVE)
-        helper.setText(R.id.item_home_title, ssb)
+        helper.setText(R.id.item_topic_title, ssb)
     }
 }

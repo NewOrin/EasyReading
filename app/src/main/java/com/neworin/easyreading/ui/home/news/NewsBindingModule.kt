@@ -11,6 +11,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class NewsBindingModule {
 
-    @ContributesAndroidInjector(modules = arrayOf(NewsBindingModule::class))
+    @ContributesAndroidInjector(modules = arrayOf(NewsViewModule::class))
     abstract fun contributeNewsFragment(): NewsFragment
 }
