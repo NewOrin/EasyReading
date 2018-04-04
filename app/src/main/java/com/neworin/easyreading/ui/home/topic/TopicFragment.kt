@@ -34,7 +34,7 @@ class TopicFragment : BaseRecyclerViewFragment<TopicEntity, BaseViewHolder>(), T
     }
 
     override fun getAdapter(): BaseQuickAdapter<TopicEntity, BaseViewHolder>? {
-        return TopicAdapter(R.layout.item_topic, mDatas)
+        return TopicAdapter(R.layout.item_home_list, mDatas)
     }
 
     override fun showTopicData(dto: PageResult<TopicEntity>?) {

@@ -21,7 +21,7 @@ class TopicPresenter(repository: ReadingRepository, rootView: TopicContract.View
         if (isRefresh) {
             lastCursor = null
         }
-        mRepository.getTopicList(lastCursor, PAGE_SIZE)?.subscribe(object : Consumer<PageResult<TopicEntity>> {
+        val obser = mRepository.getTopicList(lastCursor, PAGE_SIZE)?.subscribe(object : Consumer<PageResult<TopicEntity>> {
             override fun accept(t: PageResult<TopicEntity>) {
                 mView.showTopicData(t)
                 lastCursor = t.data?.last()?.order
@@ -32,5 +32,6 @@ class TopicPresenter(repository: ReadingRepository, rootView: TopicContract.View
                 mView.showTopicDataError()
             }
         })
+        addDispose(obser)
     }
 }

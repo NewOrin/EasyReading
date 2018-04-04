@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.neworin.easyreading.ui.home.news.NewsFragment
 import com.neworin.easyreading.ui.home.topic.TopicFragment
 
 /**
@@ -14,6 +15,9 @@ import com.neworin.easyreading.ui.home.topic.TopicFragment
 class HomeAdapter(fm: FragmentManager, var list: ArrayList<String>) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
+        if (position == 1) {
+            return NewsFragment.newInstance(Bundle())
+        }
         return TopicFragment.newInstance(Bundle())
     }
 

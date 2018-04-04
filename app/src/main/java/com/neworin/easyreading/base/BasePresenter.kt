@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable
  */
 open class BasePresenter<M : IModel, V : IView>(var mRepository: M,var mView: V) : IPresenter {
 
-    protected var mCompositeDispose: CompositeDisposable? = null
+    private var mCompositeDispose: CompositeDisposable? = null
 
     protected fun addDispose(disposable: Disposable) {
         if (mCompositeDispose == null) {

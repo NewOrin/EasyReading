@@ -1,6 +1,7 @@
 package com.neworin.easyreading.data
 
 import com.neworin.easyreading.data.api.ReadingService
+import com.neworin.easyreading.vo.NewsEntity
 import com.neworin.easyreading.vo.PageResult
 import com.neworin.easyreading.vo.TopicEntity
 import io.reactivex.Flowable
@@ -19,6 +20,10 @@ class ReadingRepository(service: ReadingService?) : ReadingDataSourse {
 
     override fun getTopicList(lastCursor: Int?, pageSize: Int): Flowable<PageResult<TopicEntity>>? {
         return doRequest(mReadingService?.getTopicList(lastCursor, pageSize))
+    }
+
+    override fun getNewsList(lastCursor: Int?, pageSize: Int): Flowable<PageResult<NewsEntity>>? {
+        return doRequest(mReadingService?.getNewsList(lastCursor, pageSize))
     }
 
     private fun <RESPONSE> doRequest(request: Flowable<RESPONSE>?): Flowable<RESPONSE>? {
