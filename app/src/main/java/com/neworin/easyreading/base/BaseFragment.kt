@@ -31,6 +31,7 @@ abstract class BaseFragment : RxFragment(), IView, HasSupportFragmentInjector {
     @Inject
     var childFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
     private var isViewPrepared: Boolean? = null
+    open var mContainer: ViewGroup? = null
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
         return childFragmentInjector
@@ -49,7 +50,8 @@ abstract class BaseFragment : RxFragment(), IView, HasSupportFragmentInjector {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutResId(), container, false)
+        mContainer = container
+        return inflater.inflate(getLayoutResId(), mContainer, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

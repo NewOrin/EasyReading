@@ -16,7 +16,10 @@ class TopicPresenter(repository: ReadingRepository, rootView: TopicContract.View
     private var lastCursor: Int? = null
     private val PAGE_SIZE = 10
 
-    override fun getTopicData() {
+    override fun getTopicData(isRefresh: Boolean) {
+        if (isRefresh) {
+            lastCursor = null
+        }
         mRepository.getTopicList(lastCursor, PAGE_SIZE)?.subscribe(object : Consumer<TopicEntity> {
             override fun accept(t: TopicEntity) {
                 mView.showTopicData(t)
@@ -25,6 +28,7 @@ class TopicPresenter(repository: ReadingRepository, rootView: TopicContract.View
         }, object : Consumer<Throwable> {
             override fun accept(t: Throwable?) {
                 showToast(t?.message)
+                mView.showTopicDataError()
             }
         })
     }

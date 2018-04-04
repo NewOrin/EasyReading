@@ -12,9 +12,10 @@ import com.neworin.easyreading.vo.TopicEntity
 interface TopicContract {
     interface View : IView {
         fun showTopicData(topicEntity: TopicEntity?)
+        fun showTopicDataError()
     }
 
     interface Presenter : IPresenter {
-        fun getTopicData()
+        fun getTopicData(isRefresh: Boolean)
     }
 }

@@ -3,12 +3,15 @@ package com.neworin.easyreading.base
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.neworin.easyreading.BaseApplication
 import com.neworin.easyreading.R
 import kotlinx.android.synthetic.main.item_base_recyclerview.*
+import kotlinx.android.synthetic.main.item_empty_view.*
 
 /**
  * author : ZhangFubin
@@ -26,9 +29,17 @@ abstract class BaseRecyclerViewFragment<T, K : BaseViewHolder> : BaseFragment() 
     override fun initializeView(view: View) {
         super.initializeView(view)
         base_rv.layoutManager = getLayoutManager()
-        base_rv.adapter = getAdapter()
+        mAdapter = getAdapter()
+        base_rv.adapter = mAdapter
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+        val emptyView = LayoutInflater.from(activity).inflate(R.layout.item_empty_view, mContainer, false)
+        mAdapter?.emptyView = emptyView
         base_srl.setColorSchemeColors(ContextCompat.getColor(BaseApplication.INSTANCE, R.color.colorAccent))
         base_srl.setOnRefreshListener {
+            handleRefresh()
+        }
+        mAdapter?.setOnLoadMoreListener({ handleLoadMore() }, base_rv)
+        emptyView.setOnClickListener {
             handleRefresh()
         }
     }
@@ -37,10 +48,7 @@ abstract class BaseRecyclerViewFragment<T, K : BaseViewHolder> : BaseFragment() 
         return LinearLayoutManager(activity)
     }
 
-    private fun setAdapter() {
-        this.mAdapter = getAdapter()
-    }
-
     abstract fun getAdapter(): BaseQuickAdapter<T, K>?
     abstract fun handleRefresh()
+    abstract fun handleLoadMore()
 }
