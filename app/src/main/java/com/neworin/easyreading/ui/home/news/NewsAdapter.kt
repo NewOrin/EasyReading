@@ -16,7 +16,11 @@ class NewsAdapter(layoutId: Int, datas: ArrayList<NewsEntity>) : BaseQuickAdapte
     override fun convert(helper: BaseViewHolder?, item: NewsEntity?) {
         helper?.setText(R.id.item_news_title, item?.title)
         helper?.setText(R.id.item_news_summary, item?.summaryAuto)
-        helper?.setText(R.id.item_news_site, item?.siteName)
+        if (item?.authorName != null) {
+            helper?.setText(R.id.item_news_site, "${item.siteName}/${item.authorName}")
+        } else {
+            helper?.setText(R.id.item_news_site, item?.siteName)
+        }
         helper?.setText(R.id.item_news_time, formatTime(item?.publishDate))
     }
 }
