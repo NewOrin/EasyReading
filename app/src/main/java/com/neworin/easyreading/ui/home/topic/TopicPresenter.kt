@@ -3,6 +3,7 @@ package com.neworin.easyreading.ui.home.topic
 import com.neworin.easyreading.base.BasePresenter
 import com.neworin.easyreading.data.ReadingRepository
 import com.neworin.easyreading.utils.showToast
+import com.neworin.easyreading.vo.PageResult
 import com.neworin.easyreading.vo.TopicEntity
 import io.reactivex.functions.Consumer
 
@@ -20,10 +21,10 @@ class TopicPresenter(repository: ReadingRepository, rootView: TopicContract.View
         if (isRefresh) {
             lastCursor = null
         }
-        mRepository.getTopicList(lastCursor, PAGE_SIZE)?.subscribe(object : Consumer<TopicEntity> {
-            override fun accept(t: TopicEntity) {
+        mRepository.getTopicList(lastCursor, PAGE_SIZE)?.subscribe(object : Consumer<PageResult<TopicEntity>> {
+            override fun accept(t: PageResult<TopicEntity>) {
                 mView.showTopicData(t)
-                lastCursor = t.data.last().order
+                lastCursor = t.data?.last()?.order
             }
         }, object : Consumer<Throwable> {
             override fun accept(t: Throwable?) {

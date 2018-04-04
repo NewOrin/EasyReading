@@ -2,6 +2,7 @@ package com.neworin.easyreading.ui.home.topic
 
 import com.neworin.easyreading.mvp.IPresenter
 import com.neworin.easyreading.mvp.IView
+import com.neworin.easyreading.vo.PageResult
 import com.neworin.easyreading.vo.TopicEntity
 
 /**
@@ -11,7 +12,7 @@ import com.neworin.easyreading.vo.TopicEntity
  */
 interface TopicContract {
     interface View : IView {
-        fun showTopicData(topicEntity: TopicEntity?)
+        fun showTopicData(topicEntity: PageResult<TopicEntity>?)
         fun showTopicDataError()
     }
 

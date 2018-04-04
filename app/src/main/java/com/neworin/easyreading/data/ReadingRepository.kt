@@ -1,6 +1,7 @@
 package com.neworin.easyreading.data
 
 import com.neworin.easyreading.data.api.ReadingService
+import com.neworin.easyreading.vo.PageResult
 import com.neworin.easyreading.vo.TopicEntity
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 class ReadingRepository(service: ReadingService?) : ReadingDataSourse {
     private var mReadingService = service
 
-    override fun getTopicList(lastCursor: Int?, pageSize: Int): Flowable<TopicEntity>? {
+    override fun getTopicList(lastCursor: Int?, pageSize: Int): Flowable<PageResult<TopicEntity>>? {
         return doRequest(mReadingService?.getTopicList(lastCursor, pageSize))
     }
 

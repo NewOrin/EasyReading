@@ -14,8 +14,8 @@ import com.neworin.easyreading.vo.TopicEntity
  * time   : 2018/04/03
  * desc   :
  */
-class TopicAdapter(layoutId: Int, datas: ArrayList<TopicEntity.DataBean>) : BaseQuickAdapter<TopicEntity.DataBean, BaseViewHolder>(layoutId, datas) {
-    override fun convert(helper: BaseViewHolder, item: TopicEntity.DataBean?) {
+class TopicAdapter(layoutId: Int, datas: ArrayList<TopicEntity>) : BaseQuickAdapter<TopicEntity, BaseViewHolder>(layoutId, datas) {
+    override fun convert(helper: BaseViewHolder, item: TopicEntity?) {
         helper.setText(R.id.item_topic_title, item?.title)
         helper.setText(R.id.item_topic_summary, item?.summary)
         val ssb = SpannableStringBuilder(item?.title + "   " + formatTime(item?.publishDate))
